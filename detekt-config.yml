@@ -1,0 +1,60 @@
+# 差分のみ追記してください。デフォルトは下記参照
+# https://github.com/detekt/detekt/blob/master/detekt-core/src/main/resources/default-detekt-config.yml
+
+build:
+  maxIssues: 0
+
+# detekt のレポートはコンソールに出力する
+console-reports:
+  active: true
+  exclude:
+    #  - 'ProjectStatisticsReport'
+    #  - 'ComplexityReport'
+    #  - 'NotificationReport'
+    #  - 'FindingsReport'
+    - 'FileBasedFindingsReport'
+  #  - 'BuildFailureReport'
+
+# インデントサイズは2
+formatting:
+  active: true
+  Indentation:
+    indentSize: 2
+  ParameterListWrapping:
+    active: true
+    autoCorrect: true
+    indentSize: 2
+  MaximumLineLength:
+    maxLineLength: 140
+  AnnotationOnSeparateLine:
+    active: false
+
+# TooGenericExceptionCaughtは無効
+exceptions:
+  active: true
+  TooGenericExceptionCaught:
+    active: false
+
+style:
+  active: true
+  MaxLineLength:
+    active: true
+    maxLineLength: 140
+    excludePackageStatements: true
+    excludeImportStatements: true
+    excludeCommentStatements: false
+  ThrowsCount:
+    active: false
+  ReturnCount:
+    active: false
+  ForbiddenComment: # TODO: 初期設定として一旦TODOコメントを使えるようにする。TODOを潰していくタイミングでtrueに設定してください。
+    active: false
+
+complexity:
+  LongParameterList:
+    functionThreshold: 26
+    constructorThreshold: 26
+  TooManyFunctions:
+    thresholdInFiles: 17
+    thresholdInClasses: 17
+    thresholdInInterfaces: 17

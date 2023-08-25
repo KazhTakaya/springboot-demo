@@ -10,20 +10,19 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 @RequestMapping("/demo")
 class DemoController(
-    private val demoService: DemoService
+  private val demoService: DemoService
 ) {
 
-    @GetMapping
-    fun demo(model: Model): String {
-        model.addAttribute("emailForm", EmailForm())
-        return "demo"
-    }
+  @GetMapping
+  fun demo(model: Model): String {
+    model.addAttribute("emailForm", EmailForm())
+    return "demo"
+  }
 
-    @PostMapping("/sendEmail")
-    fun sendEmail(emailForm: EmailForm, model: Model): String {
-        demoService.sendEmail(emailForm.address ?: "", emailForm.message ?: "")
-        model.addAttribute("emailForm", emailForm)
-        return "redirect:/demo"
-    }
-
+  @PostMapping("/sendEmail")
+  fun sendEmail(emailForm: EmailForm, model: Model): String {
+    demoService.sendEmail(emailForm.address ?: "", emailForm.message ?: "")
+    model.addAttribute("emailForm", emailForm)
+    return "redirect:/demo"
+  }
 }
