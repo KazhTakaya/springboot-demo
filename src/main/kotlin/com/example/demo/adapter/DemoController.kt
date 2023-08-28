@@ -21,7 +21,7 @@ class DemoController(
 
   @PostMapping("/sendEmail")
   fun sendEmail(emailForm: EmailForm, model: Model): String {
-    demoService.sendEmail(emailForm.address ?: "", emailForm.message ?: "")
+    demoService.sendEmail(emailForm.address ?: "", emailForm.name ?: "")
     model.addAttribute("emailForm", emailForm)
     return "redirect:/demo"
   }

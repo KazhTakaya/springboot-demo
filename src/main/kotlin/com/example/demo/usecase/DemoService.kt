@@ -1,25 +1,26 @@
 package com.example.demo.usecase
 
+import com.example.demo.domain.EmailService
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Service
 import org.thymeleaf.context.Context
 import org.thymeleaf.spring6.SpringTemplateEngine
-import java.time.LocalDateTime
 
 @Service
 class DemoService(
+  private val emailService: EmailService,
   @Qualifier("textEmailTemplateEngine") private val templateEngine: SpringTemplateEngine
 ) {
 
-  fun sendEmail(address: String, message: String) {
-    println("address: $address")
-    println(createMessage(message))
+  fun sendEmail(address: String, name: String) {
+    val message = createMessage(name)
+    emailService.sendEmail(address, message)
+    
   }
 
-  fun createMessage(message: String): String {
+  fun createMessage(name: String): String {
     val context = Context()
-    context.setVariable("date", LocalDateTime.now())
-    context.setVariable("message", message)
+    context.setVariable("name", name)
     return templateEngine.process("sample", context)
   }
 }
